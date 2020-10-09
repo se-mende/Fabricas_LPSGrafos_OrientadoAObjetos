@@ -21,6 +21,7 @@ public class main {
 				break;
 			case 2:
 				variacionesBusqueda();
+				break;
 		}
 	}
 
@@ -42,12 +43,13 @@ public class main {
 			g.addArch(a, b);
 			g.addArch(b, c);
 			g.addArch(a, d);
+			
+			System.out.println(g.getSearchStrategy().RouteExists(a, c, false));
+			System.out.println(g.getSearchStrategy().RouteExists(c, a, false));
+			
 		} catch (Exception e) {
 			System.out.println("Funcion no soportada. Revisar configuracion del grafo.");
 		}
-						
-		System.out.println(g.getSearchStrategy().RouteExists(a, c));
-		System.out.println(g.getSearchStrategy().RouteExists(c, a));
 	}
 	
 	private static void ejemploPesos() {
@@ -68,12 +70,13 @@ public class main {
 			g.addArch(a, b, 10);
 			g.addArch(b, c, 20);
 			g.addArch(a, d, 30);
+			
+			System.out.println(g.getSearchStrategy().RouteExists(a, c, false));
+			System.out.println(g.getSearchStrategy().RouteExists(c, a, false));
+			
 		} catch (Exception e) {
 			System.out.println("Funcion no soportada. Revisar configuracion del grafo.");
 		}
-								
-		System.out.println(g.getSearchStrategy().RouteExists(a, c));
-		System.out.println(g.getSearchStrategy().RouteExists(c, a));
 	}
 	
 	private static void variacionesBusqueda() {
@@ -91,14 +94,15 @@ public class main {
 		g.addNode(d);
 		
 		try {
-			g.addArch(a, b);
-			g.addArch(b, c);
-			g.addArch(a, d);
+			g.addArch(a, b, 10);
+			g.addArch(b, c, 20);
+			g.addArch(a, d, 30);
+			
+			List<Node> nodes = g.getSearchStrategy().SearchRoute(a, c, true);
+			
 		} catch (Exception e) {
 			System.out.println("Funcion no soportada. Revisar configuracion del grafo.");
 		}
-
-		List<Node> nodes = g.getSearchStrategy().SearchRoute(a, c);
 	}
 
 }

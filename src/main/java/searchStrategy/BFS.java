@@ -9,7 +9,7 @@ import node.Node;
 public class BFS implements SearchStrategy{
 
 	@Override
-	public List<Node> SearchRoute(Node source, Node target) {
+	public List<Node> SearchRoute(Node source, Node target, boolean verbose) {
 		
 		List<Node> routeNodes = new ArrayList<>();
 		
@@ -28,15 +28,16 @@ public class BFS implements SearchStrategy{
 			visitedNodes.add(current);
             if(current.equals(target)) {
             	routeNodes.add(current);
+            	if(verbose) {
+            		System.out.println("Visited nodes (BFS)");
+	            	for (Node node : visitedNodes) {
+						System.out.println(node.getName());
+					}
+            	}
                 return routeNodes;
             }
             else{
                 if(current.getAdjacentNodes().isEmpty()) {
-                	System.out.println("Visited nodes (BFS)");
-	            	for (Node node : visitedNodes) {
-						System.out.println(node.getName());
-					}
-	            	System.out.println(target.getName());
                     return null;
                 }
                 else {
@@ -55,8 +56,8 @@ public class BFS implements SearchStrategy{
 	}
 
 	@Override
-	public boolean RouteExists(Node source, Node target) {
-		if (SearchRoute(source, target) != null) {
+	public boolean RouteExists(Node source, Node target, boolean verbose) {
+		if (SearchRoute(source, target, verbose) != null) {
 			return true;
 		}
 		return false;
